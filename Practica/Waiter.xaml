@@ -1,0 +1,43 @@
+﻿<Window x:Class="Practica.Waiter"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Practica"
+        mc:Ignorable="d"
+        Title="Waiter" ResizeMode="NoResize" Height="450" Width="700">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="260"/>
+            <ColumnDefinition Width="262"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Button Grid.Row="1" Grid.Column="3" Margin="10,280,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="95" Content="Создать Заказ" Command="{Binding Waiter.SumbitCommand}" CommandParameter="{Binding Waiter.SumbitCommand}"></Button>
+        <!--<Button Grid.Row="1" Grid.Column="3" Margin="10,320,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="95" Content="Текущие заказы" Command="{Binding MainVM.OpenWindow}" CommandParameter="{Binding MainVM.OpenWindow}"></Button>-->
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Text="Список блюд"></TextBlock>
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" Text="Заказ"></TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Text="Итоговая стоимость:" Margin="10,0,0,56"></TextBlock>
+        <TextBlock Grid.Row="1"  Grid.Column="1" Margin="10,0,0,90" HorizontalAlignment="Left" VerticalAlignment="Bottom" Text="Место"></TextBlock>
+        <ComboBox Grid.Row="1" Grid.Column="1" Margin="50,0,0,88" HorizontalAlignment="Left" VerticalAlignment="Bottom" SelectedItem="{Binding Waiter.Place}" ItemsSource="{Binding Waiter.Places}" DisplayMemberPath="NumberPlace" Height="20" Width="40"/>
+
+        <DataGrid HeadersVisibility="Column" Name="Dishs" ItemsSource="{Binding Waiter.Dishs}" SelectedItem="{Binding Waiter.Ordering}" AutoGenerateColumns="False" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Left" Grid.Row="1" ColumnWidth="*">
+            <DataGrid.Columns>
+                <DataGridTextColumn IsReadOnly="True" Header="Название блюда" MinWidth="120" MaxWidth="120" Binding="{Binding NameDish}"></DataGridTextColumn>
+                <DataGridTextColumn IsReadOnly="True" Header="Стоимость" MinWidth="70" MaxWidth="70" Binding="{Binding Price}"></DataGridTextColumn>
+                <DataGridTextColumn IsReadOnly="True" Header="Время" MinWidth="60" MaxWidth="70" Binding="{Binding CookingTime}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid HeadersVisibility="Column" Name="Reserve" ItemsSource="{Binding Waiter.DishesInReserve}" SelectedItem="{Binding Waiter.Remove}" AutoGenerateColumns="False" Grid.Row="1" VerticalAlignment="Top" Height="250" Grid.Column="1" ColumnWidth="*" Grid.ColumnSpan="1" Margin="2,0,0,0">
+            <DataGrid.Columns>
+                <DataGridTextColumn IsReadOnly="True" Header="Название блюда" MinWidth="120" MaxWidth="120" Binding="{Binding NameDish}"></DataGridTextColumn>
+                <DataGridTextColumn IsReadOnly="True" Header="Стоимость" MinWidth="70" MaxWidth="70" Binding="{Binding Price}"></DataGridTextColumn>
+                <DataGridTextColumn IsReadOnly="True" Header="Время" MinWidth="80" MaxWidth="80" Binding="{Binding CookingTime}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
